@@ -435,66 +435,124 @@ function ImageShowcase() {
   )
 }
 
-// About Section
+// About Section - Framer Style
 function About() {
+  const experiences = [
+    { role: 'Freelance Practice', company: 'Hanzo Co.', period: '2011  →  Now' },
+    { role: 'Design Lead', company: 'Google', period: '2024  →  Now' },
+    { role: 'Senior Designer', company: 'PayPal', period: '2019  →  2024' },
+    { role: 'Product Designer', company: 'Meta', period: '2016  →  2019' },
+  ]
+
   return (
     <section id="about" className="py-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+          className="text-center mb-16"
         >
-          <motion.div variants={fadeInUp}>
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
-              About Us
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
-              We're a creative studio building brands that stand out
-            </h2>
-            <p className="text-text-muted text-lg mb-8">
-              Founded in 2020, Hanzo has helped over 100+ startups transform their
-              visual identity. We believe great design should be accessible to
-              everyone, which is why we created a subscription model that works.
-            </p>
-            <div className="flex gap-8">
-              <div>
-                <p className="text-4xl sm:text-5xl font-bold text-[#FF3700]">100+</p>
-                <p className="text-text-muted">Happy Clients</p>
-              </div>
-              <div>
-                <p className="text-4xl sm:text-5xl font-bold text-[#FF3700]">500+</p>
-                <p className="text-text-muted">Projects Done</p>
-              </div>
-            </div>
-          </motion.div>
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+            <em className="not-italic text-black/60">Our Projects</em>
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            Pushing boundaries <span className="text-black/50">since 2011</span>
+          </h2>
+        </motion.div>
 
-          <motion.div variants={fadeInUp} className="relative">
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          {/* Left - Image & Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            {/* Photo */}
             <motion.div
-              whileHover={{ rotate: 0 }}
-              animate={{ rotate: 3 }}
-              className="aspect-square rounded-3xl overflow-hidden border-2 border-black shadow-2xl"
+              style={{ rotate: -2 }}
+              className="aspect-[3/2] rounded-2xl overflow-hidden border border-black/10 shadow-lg"
             >
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800"
-                alt="Team"
+                src="https://framerusercontent.com/images/zRVCa2eOgJIf1mJK5PYcBLrYI.png"
+                alt="Joris van Dijk"
                 className="w-full h-full object-cover"
               />
             </motion.div>
-            <motion.div
-              animate={{ rotate: [0, 5, 0], y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity }}
-              className="absolute -bottom-6 -right-6 w-28 h-28 bg-[#FF3700] rounded-2xl shadow-xl"
-            />
-            <motion.div
-              animate={{ rotate: [0, -5, 0], y: [0, 10, 0] }}
-              transition={{ duration: 5, repeat: Infinity }}
-              className="absolute -top-4 -left-4 w-20 h-20 bg-[#FFD500] rounded-xl shadow-lg"
-            />
+
+            {/* Info Card */}
+            <div className="flex items-center justify-between">
+              <div className="text-right flex-1">
+                <p className="font-semibold">Joris van Dijk</p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between">
+              {/* Social Links */}
+              <div className="flex items-center gap-2">
+                <a href="#" className="w-8 h-8 flex items-center justify-center text-black/50 hover:text-black transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-8 h-8 flex items-center justify-center text-black/50 hover:text-black transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z" />
+                  </svg>
+                </a>
+                <a href="#" className="w-8 h-8 flex items-center justify-center text-black/50 hover:text-black transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+                    <path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L143.24,99.34,102.75,35.71A8,8,0,0,0,96,32H48a8,8,0,0,0-6.75,12.3l62.6,98.37-61.77,68a8,8,0,1,0,11.84,10.76l58.84-64.72,40.49,63.63A8,8,0,0,0,160,224h48a8,8,0,0,0,6.75-12.29ZM164.39,208,62.57,48h29L193.43,208Z" />
+                  </svg>
+                </a>
+              </div>
+              <p className="text-sm text-black/50">Hanzo Studio, Founder</p>
+            </div>
           </motion.div>
-        </motion.div>
+
+          {/* Right - Bio & Experience */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-2 space-y-8"
+          >
+            {/* Bio */}
+            <div className="flex items-start gap-4">
+              <p className="text-lg sm:text-xl leading-relaxed text-black/80 flex-1">
+                Joris van Dijk is a Dutch designer known for his minimalist, expressive digital work. He helps startups and studios create clean interfaces and strong branding. Based in Utrecht, he blends function with emotion — and often spends his free time cycling or exploring generative art.
+              </p>
+              {/* Smiley Icon */}
+              <svg className="w-10 h-10 text-[#FF3700] flex-shrink-0 hidden sm:block" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM80,108a12,12,0,1,1,12,12A12,12,0,0,1,80,108Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,176,108Zm-1.07,48c-10.29,17.79-27.4,28-46.93,28s-36.63-10.2-46.92-28a8,8,0,1,1,13.84-8c7.47,12.91,19.21,20,33.08,20s25.61-7.1,33.07-20a8,8,0,0,1,13.86,8Z" />
+              </svg>
+            </div>
+
+            {/* Experience List */}
+            <div className="border-t border-black/10 pt-6">
+              {experiences.map((exp, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i }}
+                  className="flex items-center justify-between py-4 border-b border-black/10"
+                >
+                  <span className="font-medium">{exp.role}</span>
+                  <span className="text-black/50 hidden sm:block">{exp.company}</span>
+                  <span className="text-sm">{exp.period}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -569,83 +627,78 @@ function Process() {
   )
 }
 
-// Work/Projects Section
+// Work/Projects Section - Framer Style
 function Work() {
   const projects = [
     {
-      title: 'Fintech Dashboard',
-      category: 'Web Design',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800'
+      title: 'Strida',
+      tags: ['portfolio', 'sidebar'],
+      image: 'https://framerusercontent.com/images/aLickQcDkn7JlTftxkq33tHE.jpg'
     },
     {
-      title: 'E-commerce Rebrand',
-      category: 'Branding',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800'
+      title: 'Bravo',
+      tags: ['UI/UX', 'App'],
+      image: 'https://framerusercontent.com/images/ISAjHKBwJV6BJzD55lhE8XAFBM.jpg'
     },
     {
-      title: 'Health App UI',
-      category: 'Mobile App',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800'
+      title: 'Nitro',
+      tags: ['Design System', 'Web'],
+      image: 'https://framerusercontent.com/images/nT9mTBoP2h9YdschdGP72ovRHk.jpg'
     },
     {
-      title: 'SaaS Landing Page',
-      category: 'Web Design',
-      image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800'
+      title: 'Fargo',
+      tags: ['SaaS', 'Web'],
+      image: 'https://framerusercontent.com/images/vzQsCEYy7zN2RmDQcgrizz0O0MI.jpg'
     }
   ]
 
   return (
     <section id="work" className="py-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12"
-        >
-          <div>
-            <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
-              Our Work
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              Recent Projects
-            </h2>
-          </div>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 text-[#FF3700] font-semibold hover:gap-3 transition-all"
-          >
-            View All <ArrowRight className="w-5 h-5" />
-          </a>
-        </motion.div>
-
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
         >
           {projects.map((project) => (
-            <motion.article
+            <motion.a
               key={project.title}
+              href="#"
               variants={fadeInUp}
-              whileHover={{ y: -10 }}
-              className="group cursor-pointer"
+              className="group relative block"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden mb-4 border-2 border-black shadow-xl">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              {/* Image Container */}
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#f5f5f5] border border-white/50">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.4 }}
+                  className="w-full h-full"
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+
+                {/* Hover Info Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                  <h4 className="text-lg font-medium text-black/50 mb-2">{project.title}</h4>
+                  <div className="flex gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-white rounded-full text-xs text-black/80"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <span className="text-text-muted text-sm">{project.category}</span>
-              <h3 className="text-xl sm:text-2xl font-bold group-hover:text-[#FF3700] transition-colors">
-                {project.title}
-              </h3>
-            </motion.article>
+            </motion.a>
           ))}
         </motion.div>
       </div>
