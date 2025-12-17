@@ -397,8 +397,10 @@ function LogoTicker() {
   )
 }
 
-// Image Showcase - Vertical scrolling tickers
+// Image Showcase - Infinite vertical scrolling tickers
 function ImageShowcase() {
+  const [isHovered, setIsHovered] = useState(false)
+
   const leftImages = [
     'https://framerusercontent.com/images/670uUrkwoRnzhCl9b3kEMwUmgE4.jpg',
     'https://framerusercontent.com/images/J4Ox47KYv4g8Lb2C0PXNkjDaA.jpg',
@@ -417,75 +419,79 @@ function ImageShowcase() {
     offset: ["start end", "end start"]
   })
 
-  const leftY = useTransform(scrollYProgress, [0, 1], [0, -200])
-  const rightY = useTransform(scrollYProgress, [0, 1], [-100, 100])
+  const tickerY = useTransform(scrollYProgress, [0, 1], [0, 400])
 
   return (
-    <section ref={ref} className="py-20 px-4 sm:px-6 overflow-hidden">
-      <div className="max-w-6xl mx-auto relative">
+    <section ref={ref} id="intro" className="py-20 px-4 sm:px-6 overflow-hidden relative">
+      <div className="max-w-5xl mx-auto relative">
         {/* Two Column Tickers */}
-        <div className="flex gap-6 h-[600px] relative">
-          {/* Left Column - scrolls up */}
-          <motion.div
-            style={{ y: leftY }}
-            className="flex-1 flex flex-col gap-6"
-          >
-            {[...leftImages, ...leftImages].map((img, i) => (
-              <div
-                key={i}
-                className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
-              >
-                <img
-                  src={img}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </motion.div>
+        <motion.div
+          style={{ y: tickerY }}
+          className="flex gap-6 h-[700px] relative overflow-hidden"
+        >
+          {/* Left Column - scrolls up infinitely */}
+          <div className="flex-1 relative overflow-hidden">
+            <div className="animate-scroll-up flex flex-col gap-6">
+              {[...leftImages, ...leftImages, ...leftImages, ...leftImages, ...leftImages].map((img, i) => (
+                <div
+                  key={i}
+                  className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-          {/* Right Column - scrolls down */}
-          <motion.div
-            style={{ y: rightY }}
-            className="flex-1 flex flex-col gap-6 hidden sm:flex"
-          >
-            {[...rightImages, ...rightImages].map((img, i) => (
-              <div
-                key={i}
-                className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
-              >
-                <img
-                  src={img}
-                  alt=""
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
+          {/* Right Column - scrolls down infinitely */}
+          <div className="flex-1 relative overflow-hidden hidden sm:block">
+            <div className="animate-scroll-down flex flex-col gap-6">
+              {[...rightImages, ...rightImages, ...rightImages, ...rightImages, ...rightImages].map((img, i) => (
+                <div
+                  key={i}
+                  className="aspect-[4/3] rounded-2xl overflow-hidden flex-shrink-0"
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
-        {/* See Recent Work Button */}
-        <motion.a
+        {/* See Recent Work Button - Hover to reveal label */}
+        <a
           href="#work"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.02 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 px-5 py-3 bg-white/75 backdrop-blur-sm rounded-full border border-white"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-3 bg-white/75 backdrop-blur-sm rounded-full border border-white z-10 transition-all duration-300"
         >
           {/* Folder Icon */}
-          <svg className="w-5 h-5" viewBox="0 0 256 256" fill="currentColor">
+          <svg className="w-6 h-6" viewBox="0 0 256 256" fill="currentColor">
             <path d="M216,72H131.31L104,44.69A15.88,15.88,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.41,15.41,0,0,0,39.39,216h177.5A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40Z" />
           </svg>
 
-          {/* Label with rotation */}
-          <div
-            className="px-4 py-1.5 bg-black text-white rounded-full text-sm font-semibold"
-            style={{ transform: 'rotate(19deg)' }}
+          {/* Label with rotation - appears on hover */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -18 }}
+            animate={{
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.8,
+              rotate: isHovered ? 19 : -18
+            }}
+            transition={{ duration: 0.3 }}
+            className="px-4 py-1.5 bg-black text-white rounded-full text-sm font-semibold whitespace-nowrap origin-left"
           >
             See Recent Work
-          </div>
-        </motion.a>
+          </motion.div>
+        </a>
       </div>
     </section>
   )
@@ -1202,7 +1208,7 @@ function Footer() {
 // Main App
 function App() {
   useEffect(() => {
-    // Add marquee animation styles
+    // Add marquee and vertical scroll animation styles
     const style = document.createElement('style')
     style.textContent = `
       @keyframes marquee {
@@ -1211,6 +1217,20 @@ function App() {
       }
       .animate-marquee {
         animation: marquee 20s linear infinite;
+      }
+      @keyframes scroll-up {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-33.33%); }
+      }
+      @keyframes scroll-down {
+        0% { transform: translateY(-33.33%); }
+        100% { transform: translateY(0); }
+      }
+      .animate-scroll-up {
+        animation: scroll-up 25s linear infinite;
+      }
+      .animate-scroll-down {
+        animation: scroll-down 25s linear infinite;
       }
     `
     document.head.appendChild(style)
