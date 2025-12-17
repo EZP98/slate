@@ -1034,10 +1034,10 @@ function FAQ() {
 }
 
 
-// Footer - Framer Style with special effects
+// Footer - Framer Style with sticky reveal effect
 function Footer() {
   return (
-    <footer className="relative">
+    <footer className="sticky bottom-0 left-0 right-0 -z-10">
       {/* Main Footer Container with border */}
       <div className="mx-4 sm:mx-6 mb-4 rounded-2xl overflow-hidden border-8 border-[#D9D9D9]">
         {/* Black Background with effects */}
@@ -1162,17 +1162,22 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <Services />
-      <LogoTicker />
-      <ImageShowcase />
-      <About />
-      <Process />
-      <Work />
-      <Pricing />
-      <FAQ />
+    <div className="min-h-screen relative">
+      {/* Main content wrapper with background */}
+      <div className="relative z-10 bg-[#E8E8E8]">
+        <Header />
+        <Hero />
+        <Services />
+        <LogoTicker />
+        <ImageShowcase />
+        <About />
+        <Process />
+        <Work />
+        <Pricing />
+        <FAQ />
+        {/* Spacer for sticky footer reveal */}
+        <div className="h-[500px]" />
+      </div>
       <Footer />
     </div>
   )
