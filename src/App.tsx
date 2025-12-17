@@ -137,7 +137,7 @@ function Header() {
   )
 }
 
-// Hero Section with Image Slideshow
+// Hero Section with Image Slideshow - Framer Style
 function Hero() {
   const [currentImage, setCurrentImage] = useState(0)
   const images = [
@@ -145,6 +145,8 @@ function Hero() {
     'https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=400&h=300&fit=crop',
     'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=400&h=300&fit=crop',
   ]
+
+  const logos = ['Stripe', 'Notion', 'Slack', 'Linear']
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -161,60 +163,76 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-black/10 rounded-full mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-black/10 rounded-full mb-8 shadow-sm"
         >
           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
           <span className="text-sm font-medium">Booking Open — 2 Spots Left</span>
         </motion.div>
 
-        {/* Main Heading with Slideshow */}
+        {/* Main Heading - Framer Layout */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tight">
-            <span className="block">Unlimited</span>
+          {/* Row 1: Unlimited [Slideshow] Design */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-2">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight">
+              Unlimited
+            </h1>
 
-            {/* Slideshow embedded in text */}
-            <span className="inline-flex items-center gap-4 my-2">
-              <motion.div
-                animate={{ rotate: [-2, -2] }}
-                className="relative w-[140px] h-[100px] sm:w-[200px] sm:h-[150px] rounded-2xl overflow-hidden border-2 border-black shadow-xl"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentImage}
-                    src={images[currentImage]}
-                    alt="Design showcase"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-              </motion.div>
-              <span className="text-black/40">Design</span>
-            </span>
+            {/* Slideshow embedded */}
+            <motion.div
+              style={{ rotate: -2 }}
+              className="relative w-[120px] h-[90px] sm:w-[180px] sm:h-[135px] md:w-[220px] md:h-[165px] rounded-2xl overflow-hidden border-2 border-black shadow-xl flex-shrink-0"
+            >
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImage}
+                  src={images[currentImage]}
+                  alt="Design showcase"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-full object-cover"
+                />
+              </AnimatePresence>
+            </motion.div>
 
-            <span className="block">
-              <span className="text-black/40">for </span>
-              {/* Logo Ticker inline */}
-              <motion.span
-                animate={{ rotate: [2, 2] }}
-                className="inline-block px-4 py-1 bg-white border-2 border-black rounded-full mx-2 text-3xl sm:text-5xl md:text-6xl"
-              >
-                <span className="text-[#FF3700]">Startups</span>
-              </motion.span>
-            </span>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight text-black/50">
+              Design
+            </h1>
+          </div>
 
-            <span className="block">
-              <span className="text-[#FF3700]">Solid </span>
-              <span>Startups</span>
-            </span>
-          </h1>
+          {/* Row 2: for [Logo Ticker] */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-2">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight text-black/50">
+              for
+            </h1>
+
+            {/* Logo Ticker embedded */}
+            <motion.div
+              style={{ rotate: 2 }}
+              className="relative px-4 py-2 sm:px-6 sm:py-3 bg-white border-2 border-black rounded-full shadow-xl overflow-hidden flex-shrink-0"
+            >
+              <div className="flex items-center gap-4 sm:gap-6">
+                {logos.map((logo) => (
+                  <span key={logo} className="text-lg sm:text-xl md:text-2xl font-medium text-black/70 whitespace-nowrap">
+                    {logo}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Row 3: Solid Startups */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[120px] font-bold tracking-tight">
+              Solid Startups
+            </h1>
+          </div>
         </motion.div>
 
         {/* Subtitle */}
@@ -222,7 +240,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mt-10 mb-10"
+          className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto mt-12 mb-10"
         >
           We help startups and brands create beautiful, functional products — fast and hassle-free.
         </motion.p>
