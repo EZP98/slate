@@ -558,70 +558,71 @@ function About() {
   )
 }
 
-// Process Section
+// Process Section - Framer Style (Minimal)
 function Process() {
   const steps = [
     {
       number: '01',
       title: 'Subscribe',
-      description: 'Pick a plan that fits your needs. No contracts, cancel anytime.',
-      color: '#FFD500'
+      description: 'Pick a plan that fits your needs. No contracts, cancel anytime.'
     },
     {
       number: '02',
       title: 'Request',
-      description: 'Submit unlimited design requests through our simple dashboard.',
-      color: '#05A9FF'
+      description: 'Submit unlimited design requests through our simple dashboard.'
     },
     {
       number: '03',
       title: 'Receive',
-      description: 'Get your designs delivered in 48 hours on average. Revise until perfect.',
-      color: '#52FF69'
+      description: 'Get your designs delivered in 48 hours on average. Revise until perfect.'
     }
   ]
 
   return (
-    <section id="process" className="py-20 px-4 sm:px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="process" className="py-20 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeInUp}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-[#E8E8E8] rounded-full text-sm font-medium mb-6">
-            How It Works
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm mb-6 border border-black/10 shadow-sm">
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+            <em className="not-italic text-black/50 font-serif text-lg">Process</em>
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            Simple Process, Great Results
+          <h2 className="text-[32px] font-medium tracking-[-0.04em]">
+            How it works
           </h2>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              variants={fadeInUp}
-              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -2 : 2) }}
-              className="p-8 rounded-3xl border-2 border-black shadow-xl"
-              style={{ backgroundColor: step.color }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="relative"
             >
-              <span className="text-6xl font-bold text-black/20 mb-4 block">
-                {step.number}
-              </span>
-              <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-              <p className="text-black/70">{step.description}</p>
+              {/* Number */}
+              <div className="flex items-center gap-4 mb-4">
+                <span className="text-5xl font-bold text-[#FF3700]">{step.number}</span>
+                {i < steps.length - 1 && (
+                  <div className="hidden md:block flex-1 h-px bg-black/10" />
+                )}
+              </div>
+
+              {/* Content */}
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-black/50 text-sm leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
