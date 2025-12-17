@@ -786,146 +786,160 @@ function Testimonials() {
   )
 }
 
-// Pricing Section
+// Pricing Section - Framer Style
 function Pricing() {
-  const plans = [
-    {
-      name: 'Starter',
-      price: '$1,995',
-      period: '/month',
-      description: 'Perfect for startups and small teams',
-      features: [
-        'One request at a time',
-        'Average 48h delivery',
-        'Unlimited revisions',
-        'Pause or cancel anytime'
-      ],
-      featured: false,
-      color: '#FFD500'
-    },
-    {
-      name: 'Pro',
-      price: '$3,995',
-      period: '/month',
-      description: 'For growing companies with more needs',
-      features: [
-        'Two requests at a time',
-        'Average 24h delivery',
-        'Unlimited revisions',
-        'Priority support',
-        'Pause or cancel anytime'
-      ],
-      featured: true,
-      color: '#FF3700'
-    },
-    {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: '',
-      description: 'For large teams with custom needs',
-      features: [
-        'Unlimited requests',
-        'Same-day delivery',
-        'Dedicated designer',
-        '24/7 support',
-        'Custom integrations'
-      ],
-      featured: false,
-      color: '#52FF69'
-    }
+  const [isMonthly, setIsMonthly] = useState(true)
+
+  const features = [
+    'Unlimited design requests',
+    'Fast turnaround',
+    'Fixed monthly rate',
+    'Async communication',
+    'Flexible scope',
+    'Pause anytime'
+  ]
+
+  const benefits = [
+    { icon: 'M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16Zm8,200a8,8,0,0,1-8,8H80a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h96a8,8,0,0,1,8,8ZM140,60a12,12,0,1,1-12-12A12,12,0,0,1,140,60Z', label: 'Senior-level quality' },
+    { icon: 'M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24h72v16H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V200h72a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40ZM48,56H208a8,8,0,0,1,8,8v80H40V64A8,8,0,0,1,48,56ZM208,184H48a8,8,0,0,1-8-8V160H216v16A8,8,0,0,1,208,184Z', label: 'Systems thinking' },
+    { icon: 'M245.66,74.34l-32-32a8,8,0,0,0-11.32,11.32L220.69,72H192a74.49,74.49,0,0,0-28.35,6.73c-13.62,6.29-30.83,19.71-35.54,48-5.32,31.94-29.1,39.22-41,40.86a40,40,0,1,0,.18,16.06A71.65,71.65,0,0,0,108.13,178C121.75,172,139,158.6,143.89,129.31,150.65,88.77,190.34,88,192,88h28.69l-18.35,18.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,245.66,74.34ZM48,200a24,24,0,1,1,24-24A24,24,0,0,1,48,200Z', label: 'Developer-friendly' },
+    { icon: 'M100,116.43a8,8,0,0,0,4-6.93v-72A8,8,0,0,0,93.34,30,104.06,104.06,0,0,0,25.73,147a8,8,0,0,0,4.52,5.81,7.86,7.86,0,0,0,3.35.74,8,8,0,0,0,4-1.07ZM88,49.62v55.26L40.12,132.51C40,131,40,129.48,40,128A88.12,88.12,0,0,1,88,49.62Z', label: 'Clear process' },
+    { icon: 'M176,232a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h80A8,8,0,0,1,176,232Zm40-128a87.55,87.55,0,0,1-33.64,69.21A16.24,16.24,0,0,0,176,186v6a16,16,0,0,1-16,16H96a16,16,0,0,1-16-16v-6a16,16,0,0,0-6.23-12.66A87.59,87.59,0,0,1,40,104.49C39.74,56.83,78.26,17.14,125.88,16A88,88,0,0,1,216,104Z', label: 'On-brand, every time' },
+    { icon: 'M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm109.94-52.79a8,8,0,0,0-3.89-5.4l-29.83-17-.12-33.62a8,8,0,0,0-2.83-6.08,111.91,111.91,0,0,0-36.72-20.67,8,8,0,0,0-6.46.59L128,41.85,97.88,25a8,8,0,0,0-6.47-.6A112.1,112.1,0,0,0,54.73,45.15a8,8,0,0,0-2.83,6.07l-.15,33.65-29.83,17a8,8,0,0,0-3.89,5.4,106.47,106.47,0,0,0,0,41.56Z', label: 'Reliable partner' },
+    { icon: 'M197.58,129.06l-51.61-19-19-51.65a15.92,15.92,0,0,0-29.88,0L78.07,110l-51.65,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0l19-51.61,51.65-19a15.92,15.92,0,0,0,0-29.88Z', label: 'Fast execution' },
+    { icon: 'M223.68,66.15,135.68,18h0a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32h0l80.34,44L128,120,47.66,76ZM40,90l80,43.78v85.79L40,175.82Zm96,129.57V133.82L216,90v85.78Z', label: 'Thoughtful feedback' },
+    { icon: 'M224,48V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h28A16,16,0,0,1,224,48Zm-8,124a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h28a16,16,0,0,0,16-16V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v28a16,16,0,0,0,16,16H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H48A16,16,0,0,0,32,48V76A8,8,0,0,0,40,84Z', label: 'Smooth handoff' }
   ]
 
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeInUp}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium mb-6 border border-black/10 shadow-sm">
-            Pricing
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm mb-6 border border-black/10 shadow-sm">
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+            <em className="not-italic text-black/50 font-serif text-lg">Pricing</em>
+            <span className="w-1.5 h-1.5 bg-black/40 rounded-full" />
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Simple, Transparent Pricing
+          <h2 className="text-[32px] font-medium tracking-[-0.04em]">
+            Fixed Price, Zero Limits
           </h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            No surprises. No hidden fees. Pick a plan that works for you.
-          </p>
         </motion.div>
 
+        {/* Main Pricing Card */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="rounded-3xl p-8 md:p-10"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            boxShadow: '0px 0px 0px 8px rgba(255, 255, 255, 0.25), 12px 16px 16px 0px rgba(0, 0, 0, 0.1)'
+          }}
         >
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              variants={fadeInUp}
-              whileHover={{ y: -10, rotate: i === 1 ? 0 : (i === 0 ? -1 : 1) }}
-              className={`p-8 rounded-3xl border-2 border-black shadow-xl ${
-                plan.featured
-                  ? 'bg-[#1A1A1A] text-white'
-                  : 'bg-white'
-              }`}
-            >
-              {plan.featured && (
-                <span className="inline-block px-3 py-1 bg-[#FF3700] text-white text-xs font-semibold rounded-full mb-4">
-                  Most Popular
-                </span>
-              )}
-              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-              <p className={plan.featured ? 'text-white/60 mb-6' : 'text-text-muted mb-6'}>
-                {plan.description}
-              </p>
-              <div className="mb-6">
-                <span className="text-4xl sm:text-5xl font-bold">{plan.price}</span>
-                <span className={plan.featured ? 'text-white/60' : 'text-text-muted'}>
-                  {plan.period}
-                </span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left - Price & CTA */}
+            <div className="space-y-6">
+              {/* Toggle */}
+              <div className="flex items-center gap-3">
+                <span className={`font-medium ${isMonthly ? 'text-black' : 'text-black/25'}`}>Monthly</span>
+                <button
+                  onClick={() => setIsMonthly(!isMonthly)}
+                  className="relative w-14 h-7 rounded-full transition-colors"
+                  style={{ backgroundColor: '#FF5E00', boxShadow: '0px 0px 0px 3px rgba(255, 255, 255, 0.25)' }}
+                >
+                  <motion.div
+                    animate={{ x: isMonthly ? 2 : 26 }}
+                    className="absolute top-1 w-5 h-5 bg-white rounded-full"
+                  />
+                </button>
+                <span className={`font-medium ${!isMonthly ? 'text-black' : 'text-black/25'}`}>Custom</span>
               </div>
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <svg
-                      className="w-5 h-5"
-                      style={{ color: plan.color }}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span className={plan.featured ? 'text-white/80' : ''}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <motion.button
+
+              {/* Price */}
+              <div className="flex items-baseline gap-1">
+                <span className="text-5xl md:text-6xl font-bold">$7,500</span>
+                <span className="text-xl text-black/25">/mo</span>
+              </div>
+
+              {/* Booking Info */}
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+                <span className="text-sm">Booking Open — only 2 Spots Left</span>
+              </div>
+
+              {/* CTA Button */}
+              <motion.a
+                href="#"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full py-4 rounded-full font-semibold transition-colors border-2 border-black ${
-                  plan.featured
-                    ? 'bg-[#FF3700] text-white hover:bg-[#E63200]'
-                    : 'bg-[#1A1A1A] text-white hover:bg-black'
-                }`}
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-black text-white rounded-full font-semibold"
+                style={{
+                  boxShadow: '0px -16px 48px 0px rgb(0, 0, 0) inset, 24px 24px 74px -2.5px rgba(0, 0, 0, 0.18)'
+                }}
               >
-                Get Started
-              </motion.button>
+                Book Free Discovery Call
+                <ArrowRight className="w-4 h-4 opacity-50" />
+              </motion.a>
+            </div>
+
+            {/* Right - Features Card */}
+            <motion.div
+              style={{ rotate: 1 }}
+              className="p-6 rounded-xl"
+              initial={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}
+            >
+              <h3 className="font-semibold mb-4">What's included</h3>
+              <div className="space-y-3">
+                {features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-3">
+                    <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 256 256" fill="currentColor">
+                      <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z" />
+                    </svg>
+                    <span className="text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Testimonial */}
+              <div className="mt-8 pt-6 border-t border-black/10">
+                <div className="flex items-center gap-3 mb-3">
+                  <img
+                    src="https://framerusercontent.com/images/etglVFVv5e7VnmUVyHsNK3oyIbI.png"
+                    alt="Helena Moreau"
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-sm">Helena Moreau</p>
+                    <p className="text-xs text-black/50">Creative Director at Studio Novo</p>
+                  </div>
+                </div>
+                <p className="text-sm leading-relaxed">
+                  Astrid's minimalist design approach transformed our brand. The simplicity and clarity she brought to our identity made us stand out in a crowded market.
+                  <span className="text-black/25 font-bold ml-1">"</span>
+                </p>
+              </div>
             </motion.div>
-          ))}
+          </div>
         </motion.div>
+
+        {/* Benefits Grid */}
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+          {benefits.map((benefit) => (
+            <div key={benefit.label} className="flex items-center gap-3 py-3">
+              <svg className="w-5 h-5 text-black/50 flex-shrink-0" viewBox="0 0 256 256" fill="currentColor">
+                <path d={benefit.icon} />
+              </svg>
+              <span className="text-sm">{benefit.label}</span>
+              <div className="flex-1 h-px bg-black/10 hidden sm:block" />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
